@@ -24,7 +24,7 @@ const crearUsuario = async (req, res = response) => {
 		await usuario.save();
 
 		// Generar mi JWT
-		const token = await generarJWT(usuario.uid);
+		const token = await generarJWT(usuario.id);
 
 		res.json({
 			ok: true,
@@ -63,14 +63,12 @@ const login = async (req, res = response) => {
 
 		// Generar el JWT
 		const token = await generarJWT(usuarioDB.id);
-
 		res.json({
 			ok: true,
 			usuario: usuarioDB,
 			token,
 		});
 	} catch (error) {
-		console.log(error);
 		return res.status(500).json({
 			ok: false,
 			msg: "Error inesperado",
